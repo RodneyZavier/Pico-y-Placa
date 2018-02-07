@@ -1,0 +1,142 @@
+Requiere 'date'
+
+Class Restriction 
+def initialize()
+		@lastdigit=[]
+		@peakhour=[]
+	end
+	def setDay(day)
+		@day=day
+	end	
+	def addLastDigit(digit)
+		@lastDigit.push digit
+	end	
+	def addPeakHour(hour)
+		@PeakHour.push hour
+	end
+	def getDay()
+		return @Day
+	end	
+	def getLastDigit()
+		return @LastDigit
+	end
+	def getPeakhour()
+		return @peakhour
+	end	
+end
+
+class PicoPlaca
+	def initialize()
+		@week = []
+	end
+	def addRestriction(day)
+		@week.push day
+	end
+	def setTesting(testing)
+		@Testing = testing
+	end	
+	def testing()
+		carInvolved = 0
+		tiempInvolved = 0
+		answer = 0
+		vectorDate = @testing.getDate().split("-")
+		digitPlate = @testing.getPlate()[@testing.getPlate().length-1,1]
+		ciculationtime = @testing.getTime()
+		date = Date.new vectorDate[0].to_i, vectorDate[1].to_i, vectorDate[2].to_i
+		dayDate= date.wday
+		@week.each do |i|
+			if i.getDay()==dayDate
+				i.getLastDigit().each do |d|
+					if d==digitPlate.to_i
+						carInvolved=1
+						i.getPeakTime().each do |P|
+							vectorTime=h.split("-")
+							if vectorTime[0]<=CiculationTime && CirculationTime<vectorHora[1]
+								tiempInvolved=1
+							end	
+						end	
+					end	
+				end	
+				if CarInvolved==1 && tiempInvolved==1
+					answer=1
+				end	
+			end	
+		end
+		return answer
+	end	
+end	
+
+class Testing
+	def initialize(plte,date,time)
+		@plate=plate
+		@datea=date
+		@time=time
+	end	
+	def getdate()
+		return @date
+	end
+	def getTime()
+		return @time
+	end	
+	def getPlate()
+		return @plate
+	end	
+end	
+
+
+Monday = Restriction.new()
+Monday.setDay(1)
+Monday.addLastDigit(1)
+Monday.addLastDigit(2)
+Monday.addPeaktime("07:00:00-09:30:00")
+Monday.addPeaktime("16:00:00-19:30:00")
+
+Tuesday = Restriction.new()
+Tuesday.setDay(2)
+Tuesday.addLastDigit(3)
+Tuesday.addLastDigit(4)
+Tuesday.addPeaktime("07:00:00-09:30:00")
+Tuesday.addPeaktime("16:00:00-19:30:00")
+
+Wednesday = Restriction.new()
+Wednesday.setDay(3)
+Wednesday.addLastDigit(5)
+Wednesday.addLastDigit(6)
+Wednesday.addPeaktime("07:00:00-09:30:00")
+Wednesday.addPeaktime("16:00:00-19:30:00")
+
+Thursday = Restriction.new()
+Thursday.setDay(4)
+Thursday.addLastDigit(7)
+Thursday.addLastDigit(8)
+Thursday.addPeaktime("07:00:00-09:30:00")
+Thursday.addPeaktime("16:00:00-19:30:00")
+
+Friday = Restriction.new()
+Friday.setDay(5)
+Friday.addLastDigit(9)
+Friday.addLastDigit(0)
+Friday.addPeaktime("07:00:00-09:30:00")
+Friday.addPeaktime("16:00:00-19:30:00")
+
+objPicoPlaca = PicoPlaca.new()
+objPicoPlaca.addRestriction(Monday)
+objPicoPlaca.addRestriction(Tuesday)
+objPicoPlaca.addRestriction(Wednesday)
+objPicoPlaca.addRestriction(Thursday)
+objPicoPlaca.addRestriction(Friday)
+
+puts " license plate number (example:PRK-0310): "
+placa=gets.chomp()
+puts "Enter the date: yyyy-mm-dd (example:2018-02-03):"
+date=gets.chomp()
+puts "Enter the hour: hh:mm:ss (example:08:15:27):"
+hour=gets.chomp()
+
+TestingOne = testing.new(plate,date,hour)
+objPicoPlaca.setTesting(testingOne)
+if objPicoPlaca.Testing()==1
+	puts "Can not circulate"
+else
+	puts "Can Circulate"
+end
