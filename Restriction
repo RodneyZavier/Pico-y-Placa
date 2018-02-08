@@ -1,0 +1,28 @@
+<?php
+class Restriction
+{
+	private $day;
+	private $LastDigit = array();
+	private $Peakhour = array();
+	
+	public function __construct(){}
+	public function setDay($day){
+		$this->day = $day;
+	}
+	public function addLastDigit($digit){
+		$this->LastDigit[] = $digit;
+	}
+	public function addPeakHour($hour){
+		$this->Peakhour[] = $hour;
+	}
+	public function getDay(){
+		return $this->day;
+	}
+	public function getLastDigit(){
+		return $this->LastDigit;
+	}
+	public function getPeakHour(){
+		return $this->PeakHour;
+	}
+}
+?>
